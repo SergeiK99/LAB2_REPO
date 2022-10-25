@@ -150,12 +150,12 @@ namespace lab2
         }
         new public string ToFullString()
         {
-            string res = education.ToString() + " " + NG.ToString() + " " + exams.ToString();
+            string res = education.ToString() + " " + NG.ToString() + " " + exams.ToString() + " " + student.Name.ToString() + " " + student.Lastname.ToString();
             return res;
         }
         new public string ToShortString()
         {
-            string res = education.ToString() + " " + NG.ToString() + " " + SB.ToString();
+            string res = education.ToString() + " " + NG.ToString() + " " + SB.ToString() + " " + student.Name.ToString() + " " + student.Lastname.ToString();
             return res;
         }
 
