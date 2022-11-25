@@ -17,8 +17,8 @@ namespace lab2
 
         public Person()
         {
-            name = "Andrey";
-            lastname = "Ivanov";
+            name = "Андрей";
+            lastname = "Иванов";
             BD = new DateTime(2003, 2, 22);
         }
 
@@ -40,58 +40,55 @@ namespace lab2
             set { BD = value; }
         }
         
-        public int iBdate
+        public int year
         {
-            get { return Convert.ToInt32(BD); }
-            set { BD = Convert.ToDateTime(value); }
+            get { return Bdate.Year; }
+            set { year = value; }
         }
 
-        public string ToFullString ()
+        public  string ToFullString ()
         {
-            return string.Format(name," ", lastname," ", BD);
+            return $"Имя: {name}, фамилия: {lastname}, дата рождения: {BD}";
         }
         
-        public string ToShortString ()
+        public  string ToShortString ()
         {
-            return name + " " + lastname; 
+            return $"Имя: {name}, фамилия: {lastname}";
         }
     }
     enum  Education { Specialist, Вachelor, SecondEducation }
 
-    public class Exam
+     class Exam
     {
-        public string name { get; set; }
-        public int estimation { get; set; }
-        public DateTime DTExam { get; set; }
+        public string nameD;
+        public int estimation;
+        public DateTime DTExam;
 
-        public Exam (string name, int estimation, DateTime DTExam)
+        public Exam (string nameD, int estimation, DateTime DTExam)
         {
-            this.name = name;
+            this.nameD = nameD;
             this.estimation = estimation;
             this.DTExam = DTExam;
         }
 
-        public Exam ()
+        public Exam () : this ("Default", 5 , new DateTime(2000,2,2))
         {
-            name = name;
-            estimation = estimation;
-            DTExam = DTExam;
         }
 
-        public string ToFullString()
+        public  string ToFullString()
         {
-            return string.Format(name, " ", estimation, " ", DTExam);
+            return $"Наименование: {nameD}, оценка: {estimation}, дата экзамена: {DTExam}"; ;
         }
     }
-    class Student : Person
+    class Student 
     {
-        private Person student;
-        private Education education;
-        private int NG;
-        private Exam[] exams;
-        public Student(Person person, Education education, int NG)
+        public Person st;
+        public Education education;
+        public int NG;
+        public Exam[] exams;
+        public Student(Person st, Education education, int NG)
         {
-            person = new Person();
+            this.st = st;
             this.education = education;
             this.NG = NG;
             exams = new Exam[0];
@@ -99,20 +96,16 @@ namespace lab2
         }
         public Student()
         {
-            student = new Person();
+            st = new Person();
             education = Education.Вachelor;
             NG = 1;
             exams = new Exam[0];
         }
-        public Exam[] Exams
+        
+        public Person ST
         {
-            get { return exams; }
-            set { exams = value; }
-        }
-        public Person Person
-        {
-            get { return student; }
-            set { student = value; }
+            get { return st; }
+            set { st = value; }
         }
         public Education Education
         {
@@ -148,15 +141,16 @@ namespace lab2
             Array.Resize<Exam>(ref exams, Length + examAdd.Length);
             examAdd.CopyTo(exams, Length);
         }
-        new public string ToFullString()
+          public string ToFullString()
         {
-            string res = education.ToString() + " " + NG.ToString() + " " + exams.ToString() + " " + student.Name.ToString() + " " + student.Lastname.ToString();
-            return res;
+            string examens = "";
+            foreach (var item in exams)
+                examens += $"{item.nameD} {item.estimation}\n";
+            return $"студент: {st.Name} {st.Lastname} {st.Bdate}, форма обучения:{education}, группа {NG}, результаты экзаменов:\n{examens}";
         }
-        new public string ToShortString()
+         public string ToShortString()
         {
-            string res = education.ToString() + " " + NG.ToString() + " " + SB.ToString() + " " + student.Name.ToString() + " " + student.Lastname.ToString();
-            return res;
+            return $"студент: {st.Name} {st.Lastname} {st.Bdate},  форма обучения:{education}, группа {NG}, средний балл {SB}"; ;
         }
 
     }
@@ -164,14 +158,25 @@ namespace lab2
     {
         static void Main(string[] args)
         {
-            Student student = new Student();
-            Console.WriteLine(student.ToShortString());
-            Console.WriteLine();
-            student.AddExams(new Exam());
-            student.NumG = 120;
-            student.Lastname = "Kolesnikov";
-            student.Name = "Sergey";
-            Console.WriteLine(student.ToFullString());
+            Person p1 = new Person();
+            p1.Name = "John";
+            p1.Lastname = "Ivanov";
+            p1.Bdate = new DateTime (2005, 5, 5);
+            Exam[] examen = new Exam[5];
+            examen[0] = new Exam("Математика", 4, new DateTime(2008, 6, 1));
+            examen[1] = new Exam("Физика", 4, new DateTime(2006, 6, 1));
+            examen[2] = new Exam("Информатика", 4, new DateTime(2001, 6, 1));
+            examen[3] = new Exam("География", 3, new DateTime(2002, 6, 1));
+            examen[4] = new Exam("Изо", 3, new DateTime(2003, 6, 1));
+            Student stud = new Student(p1, Education.Вachelor, 109);
+            stud.AddExams(examen);
+
+
+
+            //Console.WriteLine(value: stud.AvarageRate);//
+            Console.WriteLine(stud.ToShortString());
+            Console.WriteLine(stud.ToFullString());
+
         }
     }
 }
