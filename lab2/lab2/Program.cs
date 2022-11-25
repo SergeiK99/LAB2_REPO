@@ -39,13 +39,7 @@ namespace lab2
             get { return BD; }
             set { BD = value; }
         }
-        
-        public int year
-        {
-            get { return Bdate.Year; }
-            set { year = value; }
-        }
-
+   
         public  string ToFullString ()
         {
             return $"Имя: {name}, фамилия: {lastname}, дата рождения: {BD}";
