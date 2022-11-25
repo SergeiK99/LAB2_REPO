@@ -158,22 +158,16 @@ namespace lab2
     {
         static void Main(string[] args)
         {
-            Person p1 = new Person();
-            p1.Name = "John";
-            p1.Lastname = "Ivanov";
-            p1.Bdate = new DateTime (2005, 5, 5);
-            Exam[] examen = new Exam[5];
-            examen[0] = new Exam("Математика", 4, new DateTime(2008, 6, 1));
-            examen[1] = new Exam("Физика", 4, new DateTime(2006, 6, 1));
-            examen[2] = new Exam("Информатика", 4, new DateTime(2001, 6, 1));
-            examen[3] = new Exam("География", 3, new DateTime(2002, 6, 1));
-            examen[4] = new Exam("Изо", 3, new DateTime(2003, 6, 1));
-            Student stud = new Student(p1, Education.Вachelor, 109);
+            Person person = new Person();
+            person.Name = "Sergey";
+            person.Lastname = "Kolesnikov";
+            person.Bdate = new DateTime (2005, 5, 5);
+            Exam[] examen = new Exam[3];
+            examen[0] = new Exam("Математика", 5, new DateTime(2019, 2, 3));
+            examen[1] = new Exam("Физика", 3, new DateTime(2020, 4, 8));
+            examen[2] = new Exam("Информатика", 4, new DateTime(2021, 9, 5));
+            Student stud = new Student(person, Education.Вachelor, 11);
             stud.AddExams(examen);
-
-
-
-            //Console.WriteLine(value: stud.AvarageRate);//
             Console.WriteLine(stud.ToShortString());
             Console.WriteLine(stud.ToFullString());
 
