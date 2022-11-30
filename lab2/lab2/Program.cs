@@ -132,8 +132,9 @@ namespace lab2
         public void AddExams(params Exam[] examAdd)
         {
             int Length = exams.Length;
-            Array.Resize<Exam>(ref exams, Length + examAdd.Length);
+            Array.Resize(ref exams, Length + examAdd.Length);
             examAdd.CopyTo(exams, Length);
+
         }
           public string ToFullString()
         {
@@ -152,16 +153,17 @@ namespace lab2
     {
         static void Main(string[] args)
         {
-            Person person = new Person();
-            person.Name = "Sergey";
-            person.Lastname = "Kolesnikov";
-            person.Bdate = new DateTime (2005, 5, 5);
+            Person person = new Person("Sergey", "Kolesnikov", new DateTime(2002,2,2));
+
             Exam[] examen = new Exam[3];
-            examen[0] = new Exam("Математика", 5, new DateTime(2019, 2, 3));
-            examen[1] = new Exam("Физика", 3, new DateTime(2020, 4, 8));
-            examen[2] = new Exam("Информатика", 4, new DateTime(2021, 9, 5));
+            examen[0] = new Exam("History", 5, new DateTime(2019, 2, 3));
+            examen[1] = new Exam("Physics", 3, new DateTime(2020, 4, 8));
+            examen[2] = new Exam("Computer science", 4, new DateTime(2021, 9, 5));
+            
             Student stud = new Student(person, Education.Вachelor, 11);
+
             stud.AddExams(examen);
+
             Console.WriteLine(stud.ToShortString());
             Console.WriteLine(stud.ToFullString());
 
